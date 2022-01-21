@@ -45,6 +45,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::firstOrCreate(['name'=>'create_assignedOrderToManager']);
         Permission::firstOrCreate(['name'=>'update_assignedOrderToManager']);
         Permission::firstOrCreate(['name'=>'delete_assignedOrderToManager']);
+        //Writer
+        Permission::firstOrCreate(['name'=>'view_all_writers']);
+        Permission::firstOrCreate(['name'=>'view_writer']);
+        Permission::firstOrCreate(['name'=>'create_writer']);
+        Permission::firstOrCreate(['name'=>'update_writer']);
+        Permission::firstOrCreate(['name'=>'delete_writer']);
 
     }
     public function assignPermission(){
@@ -60,6 +66,13 @@ class RoleAndPermissionSeeder extends Seeder
             'create_assignedOrderToWriter',
             'update_assignedOrderToWriter',
             'delete_assignedOrderToWriter',
+
+            //Writer
+            'view_all_writers',
+            'view_writer',
+            'create_writer',
+            'update_writer',
+            'delete_writer',
         ]);
     }
 }

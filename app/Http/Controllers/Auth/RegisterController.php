@@ -65,19 +65,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user =User::create([
+        return 'hi';
+       User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-       $user->syncRoles($data['role']);
-         if($data['role']=='manager'){
-             $user->manager()->create([
-                 'phone'=>$data['phone'],
-                 'bank_name'=>$data['bank_name'],
-                 'account_number'=>$data['phone'],
-             ]);
+        return view('home');
+//       $user->syncRoles($data['role']);
+//         if($data['role']=='manager'){
+//             $user->manager()->create([
+//                 'phone'=>$data['phone'],
+//                 'bank_name'=>$data['bank_name'],
+//                 'account_number'=>$data['phone'],
+//             ]);
 
-         }
+//         }
+    }
+    public function registerEmp(){
+       return 'emp register';
     }
 }

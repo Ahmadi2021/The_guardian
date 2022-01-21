@@ -105,3 +105,4 @@ Route::get('/widget-basic', 'App\Http\Controllers\ChrevadminController@widget_ba
 
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

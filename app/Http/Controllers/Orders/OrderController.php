@@ -15,19 +15,23 @@ class OrderController extends Controller
     use HasOwner;
 
     private $owner;
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next){
-            $this->owner = $this->getOwner(auth()->user()->roles()->first()->name);
-            return $next($request);
-        });
-    }
+//    public function __construct()
+//    {
+//        $this->middleware(function ($request, $next){
+//            $this->owner = $this->getOwner(auth()->user()->roles()->first()->name);
+//            return $next($request);
+//        });
+//    }
 
     public function index()
     {
-        $orders =  Order::query()->get();
+//        $orders =  Order::query()->get();
+        $orders= Order::with('writers')
+            ->where('status','processing')
+            ->get();
+        return response()->json(['data'=>$orders]);
 
-        return view('dashboard.orders.latest', compact('orders'));
+//        return view('dashboard.orders.latest', compact('orders'));
 
     }
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
+use App\Models\Manager;
+use App\Models\Writer;
 use Illuminate\Http\Request;
 
 class AssignedOrderToWriter extends Controller
@@ -35,9 +37,15 @@ class AssignedOrderToWriter extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $writer = Writer::find($request->writer_id);
+        if (!$writer)
+            return response()->json(['message' => 'write not found']);
+        $OW = $writer->orders()->attach($request->order_id);
+        if (!$OW)
+            return response()->json(['message' => 'order not found']);
 
+        return response()->json(['message' => 'successfully created!']);
+    }
     /**
      * Display the specified resource.
      *

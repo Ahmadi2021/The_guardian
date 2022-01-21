@@ -79,8 +79,10 @@ class WriterController extends Controller
      * @param  \App\Models\writer  $writer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(writer $writer)
+    public function destroy(Request $request , $id)
     {
-        //
+        $writer = Writer::find($id);
+        $writer->delete();
+        return response()->json(['message'=>'delete successfully']);
     }
 }
