@@ -48,6 +48,7 @@ class UserSeeder extends Seeder
             ];
             User::query()->insert($users);
 
+
             $roles = Role::all();
             User::all()->map(function($user, $key)use($roles){
                 $user->roles()->attach(++$key);

@@ -12,12 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
 Auth::routes();
-
+//Route::get('/test', function () {
+//    dd(Auth::routes());
+//});
+Route::post('/login',[\App\Http\Controllers\Auth\LoginController::class,'login'])->middleware('accountVerify');
 Route::get('/home', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('orders', \App\Http\Controllers\Orders\OrderController::class);
@@ -105,4 +104,5 @@ Route::get('/widget-basic', 'App\Http\Controllers\ChrevadminController@widget_ba
 
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+// Assign Order To Writer
+Route::Resource('writerOrder',\App\Http\Controllers\Orders\AssignedOrderToWriter::class);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
 use App\Models\Manager;
+use App\Models\Order;
 use App\Models\Writer;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,9 @@ class AssignedOrderToWriter extends Controller
      */
     public function create()
     {
-        //
+        $writers = Writer::all();
+        $orders = Order::where('status' ,'!=','completed');
+        return view('dashboard.orders.assignOrderToWriter')->with(['writers',$writers,'orders',$orders]);
     }
 
     /**
@@ -39,12 +42,12 @@ class AssignedOrderToWriter extends Controller
     {
         $writer = Writer::find($request->writer_id);
         if (!$writer)
-            return response()->json(['message' => 'write not found']);
+            return redirect()->back()->with('message','Writer Not found');
         $OW = $writer->orders()->attach($request->order_id);
         if (!$OW)
-            return response()->json(['message' => 'order not found']);
+            return redirect()->back()->with('message','Order Not found');
 
-        return response()->json(['message' => 'successfully created!']);
+        return redirect()->back()->with('success','Created Successfully');
     }
     /**
      * Display the specified resource.

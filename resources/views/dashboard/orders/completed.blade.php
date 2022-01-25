@@ -1,11 +1,7 @@
 {{-- Extends layout --}}
 @extends('layout.default')
-
-
-
 {{-- Content --}}
 @section('content')
-
 			<div class="container-fluid">
                 <div class="page-titles">
 					<ol class="breadcrumb">
@@ -404,5 +400,5 @@
                     </div>
                 </div>
             </div>
-			
-@endsection			
+
+@endsection

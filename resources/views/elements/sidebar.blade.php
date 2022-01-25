@@ -12,6 +12,7 @@
 							<span class="nav-text">Orders</span>
 						</a>
                         <ul aria-expanded="false">
+                            <li><a href="{!! url('/writerOrder/create'); !!}">Assign Order To Writer</a></li>
                             <li><a href="{!! url('/orders/create'); !!}">New</a></li>
                             <li><a href="{!! url('/orders-latest'); !!}">Latest</a></li>
                             <li><a href="{!! url('/orders-pending'); !!}">Pending</a></li>

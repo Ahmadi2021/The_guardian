@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -10,6 +9,9 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+                        @if(session()->has('message'))
+                            <div class="alert alert-danger text-center">{{session()->get('message')}}</div>
+                        @endif
 
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
