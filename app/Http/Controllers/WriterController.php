@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\writer;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class WriterController extends Controller
      */
     public function index()
     {
-        return view('dashboard.writers.index');
+        $writers = Writer::with('user')->get();
+//        return  $writers;
+        return view('dashboard.writers.index')->with(['writers'=>$writers]);
 
     }
 

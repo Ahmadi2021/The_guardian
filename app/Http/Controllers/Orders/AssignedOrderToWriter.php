@@ -27,9 +27,10 @@ class AssignedOrderToWriter extends Controller
      */
     public function create()
     {
+//        dd(auth()->user()->getRoleNames());
         $writers = Writer::all();
-        $orders = Order::where('status' ,'!=','completed');
-        return view('dashboard.orders.assignOrderToWriter')->with(['writers',$writers,'orders',$orders]);
+        $orders = Order::where('status' ,'!=','completed')->get();
+        return view('dashboard.orders.assignOrderToWriter', compact('writers', 'orders'));
     }
 
     /**
@@ -43,7 +44,7 @@ class AssignedOrderToWriter extends Controller
         $writer = Writer::find($request->writer_id);
         if (!$writer)
             return redirect()->back()->with('message','Writer Not found');
-        $OW = $writer->orders()->attach($request->order_id);
+        $OW = $writer->orders()->sync($request->order_id);
         if (!$OW)
             return redirect()->back()->with('message','Order Not found');
 

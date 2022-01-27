@@ -1,8 +1,5 @@
 {{-- Extends layout --}}
 @extends('layout.default')
-
-
-
 {{-- Content --}}
 @section('content')
 
@@ -93,7 +90,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                          
+
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="val-phoneus">Phone
                                                         <span class="text-danger">*</span>
@@ -102,9 +99,6 @@
                                                         <input type="text" class="form-control" id="val-phoneus" name="val-phoneus" placeholder="212-999-0000">
                                                     </div>
                                                 </div>
-                                             
-                                              
-                                                
                                             </div>
                                             <div class="form-group row">
                                                 <button type="submit" class="btn ml-4 btn-primary">Submit</button>
@@ -117,5 +111,5 @@
                     </div>
                 </div>
             </div>
-			
+
 @endsection

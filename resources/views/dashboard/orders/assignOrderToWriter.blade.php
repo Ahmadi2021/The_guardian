@@ -1,8 +1,6 @@
 @extends('layout.default')
 {{-- Content --}}
 @section('content')
-    <?php  dd($orders);
-        ?>
 
     <div class="container-fluid">
         <div class="page-titles">
@@ -12,11 +10,14 @@
             </ol>
         </div>
         <div class="row">
+            @if(session()->has('success'))
+                <div class="alert alert-success">{{session()->get('success')}}</div>
+            @endif
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form class="form-valide" action="{{route('orders.store')}}" method="post" enctype="multipart/form-data">
+                            <form class="form-valide" action="{{route('writerOrder.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
 
@@ -26,8 +27,11 @@
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-10">
-                                                <select class="form-control @error('writer') is-invalid @enderror" value="{{ old('writer') }}"  name="writer" placeholder="Enter Your Budget" required>
-                                                    <option></option>
+                                                <select class="form-control @error('writer') is-invalid @enderror" value="{{ old('writer') }}"  name="writer_id" placeholder="Enter Your Budget" required>
+
+                                                    @foreach($writers as $writer)
+                                                    <option value="{{$writer->id}}">{{$writer->bank_name}}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('writer')
                                                 <span class="invalid-feedback" role="alert">
@@ -43,8 +47,11 @@
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-10">
-                                                <select class="form-control id='order' @error('order') is-invalid @enderror" value="{{ old('order') }}"  name="order"  required>
-                                                    <option></option>
+                                                <select class="form-control id='order' @error('order') is-invalid @enderror" value="{{ old('order') }}"  name="order_id"  required>
+                                                    @foreach($orders as $order)
+                                                        <option value="{{$order->id}}">{{$order->title}}</option>
+                                                    @endforeach
+
                                                 </select>
                                                 @error('order')
                                                 <span class="invalid-feedback" role="alert">
