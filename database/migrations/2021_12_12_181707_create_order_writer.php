@@ -16,7 +16,7 @@ class CreateOrderWriter extends Migration
         Schema::create('order_writer', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained();
-            $table->foreignId('writer_id')->constrained();
+            $table->foreignId('writer_id')->constrained()->cascadeOnDelete();
             $table->enum('status', config('enums.sub_status'));
             $table->timestamps();
         });

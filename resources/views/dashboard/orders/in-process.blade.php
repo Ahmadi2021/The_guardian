@@ -1,8 +1,6 @@
 {{-- Extends layout --}}
 @extends('layout.default')
 
-
-
 {{-- Content --}}
 @section('content')
 
@@ -404,5 +402,5 @@
                     </div>
                 </div>
             </div>
-			
-@endsection			
+
+@endsection

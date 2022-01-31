@@ -18,7 +18,7 @@ class CreateWritersTable extends Migration
             $table->string('phone');
             $table->string('bank_name');
             $table->string('account_number');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

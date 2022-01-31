@@ -15,7 +15,7 @@ class CreateSkillWriter extends Migration
     {
         Schema::create('skill_writer', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('writer_id')->constrained();
+            $table->foreignId('writer_id')->constrained()->cascadeOnDelete();
             $table->foreignId('skill_id')->constrained();
         });
     }

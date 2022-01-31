@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\writer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WriterController extends Controller
 {
@@ -39,7 +40,8 @@ class WriterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('edit');
+
     }
 
     /**
@@ -50,7 +52,8 @@ class WriterController extends Controller
      */
     public function show(writer $writer)
     {
-        //
+        dd('show');
+
     }
 
     /**
@@ -61,7 +64,7 @@ class WriterController extends Controller
      */
     public function edit(writer $writer)
     {
-        //
+        dd('edit');
     }
 
     /**
@@ -73,7 +76,8 @@ class WriterController extends Controller
      */
     public function update(Request $request, writer $writer)
     {
-        //
+        dd('update');
+
     }
 
     /**
@@ -82,10 +86,24 @@ class WriterController extends Controller
      * @param  \App\Models\writer  $writer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request , $id)
+    public function destroy(Writer $writer)
     {
-        $writer = Writer::find($id);
-        $writer->delete();
-        return response()->json(['message'=>'delete successfully']);
+        try{
+            DB::beginTransaction();
+//            $writer = Writer::find($writer->id);
+            $user = $writer->user()->find($writer->user_id);
+            $writer->delete();
+            $user->delete();
+
+            if($writer){
+                DB::commit();
+                return response()->json(['message'=>'delete successfully']);
+            }
+        }catch(\Exception $exception){
+            DB::rollBack();
+            return response()->json([
+                'message'=>$exception->getMessage()
+            ]);
+        }
     }
 }
